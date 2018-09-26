@@ -11,6 +11,9 @@ const form = document.querySelector(".form");
 const name = document.getElementById("name");
 name.focus();
 
+// Initially hide the job role
+hideElementById("other-title");
+
 // The job roll selection box
 const jobRoleSelector = document.getElementById("title");
 jobRoleSelector.addEventListener("change", (event)=>{
@@ -19,15 +22,11 @@ jobRoleSelector.addEventListener("change", (event)=>{
     // If the value is other then show the inputbox to add more info
     if(event.target.value === "other")
     {
-        console.log("Showing text input box");
-        // Create the input box
-        const textFieldOther = document.createElement("input");
-        textFieldOther.type = "text";
-        textFieldOther.id = "other-title";
-        textFieldOther.placeholder = "Your Job Role";
-        
-        // append to the child of the fieldset        
-        event.target.parentElement.appendChild(textFieldOther);
+        showElementById("other-title");
+    }
+    else
+    {
+        hideElementById("other-title");
     }
     
 });
@@ -35,3 +34,15 @@ jobRoleSelector.addEventListener("change", (event)=>{
 form.addEventListener("", (event)=>{
     
 });
+// helper to show an element by ID
+function showElementById(element)
+{
+    document.getElementById(element).style.display = "block";
+}
+
+// Helper to hide element by ID
+function hideElementById(element)
+{
+    document.getElementById(element).style.display = "none";
+}
+

@@ -14,8 +14,8 @@ button {
 
 body {
   font: 1em/1.5;
-  color: white;
-	background: #FAFAFA;
+  color: #424242;
+	background: #edf0f0;
 }
 
 header {
@@ -39,7 +39,7 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #536DFE;
+	background: white;
     border-radius: 10px;
     box-shadow: 3px 3px 3px grey;
 
@@ -72,10 +72,11 @@ input[type="text"],
 input[type="email"],
 legend {
 	width: 100%;
+
 }
 
 label {
-	color: #000;
+	color: #424242;
 	display: block;
 	margin-bottom: .5em;
 }
@@ -89,14 +90,15 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #c1deeb;
-	border: 2px solid #c1deeb;
+	background: #F5F5F5;
+	border: 2px solid #BDBDBD;
 	outline: none;
+    border-radius: 5px;
 }
 
 input:focus {
 	background: #fff;
-	border-color: #5e97b0;
+	border-color: #90CAF9;
 	transition: border-color .4s, background-color .4s;
 }
 
@@ -111,6 +113,7 @@ button {
 	background: #22627e;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {
