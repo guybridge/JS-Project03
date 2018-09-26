@@ -14,12 +14,13 @@ button {
 
 body {
   font: 1em/1.5;
-  color: #184f68;
-	background: #accbd9;
+  color: white;
+	background: #FAFAFA;
 }
 
 header {
 	text-align: center;  
+    color: #424242;
 }
 
 h1 {
@@ -38,7 +39,10 @@ a {
 
 form {
 	padding: .875em 1.875em 1.875em;
-	background: #85b5ca;
+	background: #536DFE;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px grey;
+
 }
 
 fieldset,
