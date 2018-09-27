@@ -42,6 +42,7 @@ form {
 	background: white;
     border-radius: 10px;
     box-shadow: 3px 3px 3px grey;
+    margin-bottom: 10px;
 
 }
 
@@ -64,7 +65,7 @@ button {
 legend {
 	font-weight: 500;
 	padding-top: .5em;
-	border-top: 2px solid #679cb3;
+	border-top: 2px solid #424242;
 	margin-bottom: 1.125em;
 }
 

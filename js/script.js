@@ -36,24 +36,34 @@ jobRoleSelector.addEventListener("change", (event)=>{
 // Get access to the design checkbox
 const designSelector = document.getElementById("design");
 designSelector.addEventListener("change", (event)=>{
-   
+    
     const color = document.getElementById("color");
     const designItem = event.target.value;
     
     if(designItem === "js puns")
     {
+        clearOptions(color);
         color.options[0] = createOption("Cornflower Blue", "cornflowerblue");
         color.options[1] = createOption("Dark Slate Grey", "darkslategrey");
         color.options[2] = createOption("Gold", "gold");
     }
     else if(designItem === "heart js")
     {
-        
+        clearOptions(color);
         color.options[0] = createOption("Tomato", "tomato");
         color.options[1] = createOption("Steel Blue", "steelblue");
         color.options[2] = createOption("Dim Grey", "dimgrey");
     }
 });
+
+// Clear the select options
+function clearOptions(select)
+{
+    for(let i = 0; i < select.length; i++)
+        {
+            select.remove(i);
+        }
+}
 
 // Creates an option item
 function createOption(text, value)
