@@ -11,6 +11,8 @@ const form = document.querySelector(".form");
 const name = document.getElementById("name");
 name.focus();
 
+// ”Job Role” section
+
 // Initially hide the job role
 hideElementById("other-title");
 
@@ -31,7 +33,21 @@ jobRoleSelector.addEventListener("change", (event)=>{
     
 });
 
+// helper to show an element by ID
+function showElementById(element)
+{
+    document.getElementById(element).style.display = "block";
+}
 
+// Helper to hide element by ID
+function hideElementById(element)
+{
+    document.getElementById(element).style.display = "none";
+}
+
+
+
+// ”T-Shirt Info” section
 
 // Get access to the design checkbox
 const designSelector = document.getElementById("design");
@@ -75,18 +91,126 @@ function createOption(text, value)
     return option;
 }
 
+//”Register for Activities” section
+
+const activities = document.querySelector(".activities");
+let runningTotal = 0;
+// Create the running total element
+const runningTotalText = document.createElement("h3");
+
+activities.addEventListener("change", (event)=>{
+           
+    const all = document.getElementById("all");
+    const jsframeworks = document.getElementById("js-frameworks");
+    const jslibs = document.getElementById("js-libs");
+    const express = document.getElementById("express");
+    const node = document.getElementById("node");
+    const buildtools = document.getElementById("build-tools");
+    const npm = document.getElementById("npm");
+    
+    
+    const checkBoxName = event.target.name;
+    const isChecked = event.target.checked;
+    
+    
+    // The activities selectors
+    switch(checkBoxName)
+    {
+        case "all":
+            console.log("Main conference selected");
+            break;
+        case "js-frameworks":
+            console.log("JS Frameworks selected");
+            toggleSelection(isChecked, express);
+            break;
+        case "js-libs":
+            console.log("JS Libraries selected");
+            toggleSelection(isChecked, node);
+            break;
+        case "express":
+            console.log("Express Workshop selected");
+            toggleSelection(isChecked, jsframeworks);
+            break;
+        case "node":
+            console.log("Node.js workshop selected");
+            toggleSelection(isChecked, jslibs);
+            break;
+        case "build-tools":
+            console.log("Build tools selected");
+            break;
+        case "npm":
+            console.log("NPM workshop selected");
+            break;
+    }
+    
+   
+    // Add to the running total
+    addToTotal(isChecked, event.target)
+
+    
+});
+
+// Add to the running total
+function addToTotal(isChecked, element)
+{
+    // Get the text content of the checkbox
+    const stringVal = element.parentElement.textContent;
+    // Get the amount by using substring
+    const amount = stringVal.substring(stringVal.length - 3, stringVal.length);
+    console.log(amount);
+    
+    // Convert the amount to an integer
+    const amountInt = parseInt(amount);
+    
+    // If it's checked then add to the total
+    if(isChecked)
+    {
+        // Add to total
+        runningTotal = runningTotal + amountInt;
+    }
+    else
+    {
+        // Remove from total
+        runningTotal = runningTotal - amountInt;
+    }
+    
+    
+    
+    runningTotalText.className = "runningTotal";
+    runningTotalText.innerHTML = "$" + runningTotal;
+    
+    
+    activities.appendChild(runningTotalText);
+
+}
+
+
+
+// cross out a checkbox
+function toggleSelection(isChecked, element)
+{
+    if(isChecked)
+    {
+         element.parentElement.style.color = "lightgrey";
+         element.checked = false;
+         element.disabled = true;
+    }
+    else
+    {
+         element.parentElement.style.color = "";
+         element.checked = false;
+         element.disabled = false;
+
+    }
+
+}
+
+
+
+
+
 form.addEventListener("submit", (event)=>{
     
 });
-// helper to show an element by ID
-function showElementById(element)
-{
-    document.getElementById(element).style.display = "block";
-}
 
-// Helper to hide element by ID
-function hideElementById(element)
-{
-    document.getElementById(element).style.display = "none";
-}
 
