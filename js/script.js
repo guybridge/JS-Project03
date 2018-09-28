@@ -11,6 +11,11 @@ const form = document.querySelector(".form");
 const name = document.getElementById("name");
 name.focus();
 
+const email = document.getElementById("mail");
+
+// Checkbox activities selected
+let hasSelectedCheckbox= false; 
+
 // ”Job Role” section
 
 // Initially hide the job role
@@ -279,6 +284,125 @@ function showBitCoin()
 
 form.addEventListener("submit", (event)=>{
     
+    console.log("Submitting form");
+    
+    // Catch a blank name field
+    if(name.value == null || name.value == "")
+    {
+        console.log("Name can't be null");
+        event.preventDefault();
+    }
+    
+    // Check for a valid email address
+    if(!isValidEmail(email.value))
+    {
+        console.log("Email isn't valid");
+        event.preventDefault();
+    }
+    
+    // Make sure at least one checkbox is selected
+    if(!isCheckBoxSelected())
+    {
+        console.log("Need to selected at least one checkbox");
+        event.preventDefault();
+    }
+    
+    if(!isCCnumValid())
+    {
+        // Show error
+    }
+    
+    if(!isZipValid())
+    {
+        // Show error
+        console.log("ZIP Code isn't valid");
+    }
+    
+    if(!isCvvValid())
+    {
+        //show Error
+        console.log("CVV isn't valid");
+    }
+
+    
+    
 });
+
+// Validate a user email
+function isValidEmail(email)
+{
+    // Check for @
+    if(email.includes("@") && email.includes("."))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+function isCheckBoxSelected()
+{
+    // Loop through the the checkboxes
+    for(let i = 0; i < activities.children.length; i++)
+    {
+        // Return true if any of the checkboxes show as true
+        if(activities.children[i].firstChild.checked)
+        {
+            console.log("Found a checked checkbox");
+            return true;
+        }
+    }
+}
+
+// Validate Credit Card Number
+function isCCnumValid()
+{
+    const ccnum = document.getElementById("cc-num").value;
+    
+    if(ccnum !== null && 
+       ccnum !== "" && 
+       ccnum.length >= 13 && 
+       ccnum.length <= 16)
+        {
+            console.log("CC Num is valid");
+            return true
+        }
+        else
+        {
+            console.log("CC num is not valid");
+        }
+    
+}
+// Validate ZIP number
+function isZipValid()
+{
+    const zip = document.getElementById("zip").value;
+    
+    if(zip !== null && zip !== "" && zip.length <= 5)
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function isCvvValid()
+{
+    const cvv = document.getElementById("cvv").value;
+    
+    console.log("CVV length is: " + cvv.length);
+    
+    if(cvv !== null && cvv !== "" && cvv.length == 3) // 0 index
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 
 
