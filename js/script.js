@@ -389,6 +389,7 @@ function isZipValid()
     }
 }
 
+// Validate CVV
 function isCvvValid()
 {
     const cvv = document.getElementById("cvv").value;
@@ -403,6 +404,11 @@ function isCvvValid()
     {
         return false;
     }
+}
+
+function showError(element)
+{
+    
 }
 
 
