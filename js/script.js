@@ -112,6 +112,8 @@ activities.addEventListener("change", (event)=>{
     const checkBoxName = event.target.name;
     const isChecked = event.target.checked;
     
+    // Animate the item click
+    fadeAnimateView(event.target.parentElement);
     
     // The activities selectors
     switch(checkBoxName)
@@ -174,13 +176,13 @@ function addToTotal(isChecked, element)
         runningTotal = runningTotal - amountInt;
     }
     
-    
-    
     runningTotalText.className = "runningTotal";
     runningTotalText.innerHTML = "$" + runningTotal;
     
     
     activities.appendChild(runningTotalText);
+    
+    fadeAnimateView(runningTotalText);
 
 }
 
@@ -189,6 +191,9 @@ function addToTotal(isChecked, element)
 // cross out a checkbox
 function toggleSelection(isChecked, element)
 {
+    
+    fadeAnimateView(element.parentElement);
+    
     if(isChecked)
     {
          element.parentElement.style.color = "lightgrey";
@@ -204,10 +209,73 @@ function toggleSelection(isChecked, element)
     }
 
 }
+// Animate views - Used in the activies section
+function fadeAnimateView(element)
+{
+    $(element).fadeOut(0);
+    $(element).fadeIn(700);
+}
+
+// "Payment Info" section
+
+const paymentSelector = document.getElementById("payment");
+// Set the default payment method to credit card
+paymentSelector.value = "credit card";
 
 
+const creditcard = document.getElementById("credit-card");
+const paypal = document.getElementById("paypal");
+const bitcoin = document.getElementById("bitcoin");
+// Hide the paypal and bitcoin divs
+paypal.style.display = "none";
+bitcoin.style.display = "none";
 
+// Disable the "Select payment method"
+paymentSelector.options[0].disabled = true;
 
+// Add an event listener
+paymentSelector.addEventListener("change", function() {
+    
+    option = this.value;
+    
+    console.log(option);
+    
+    if(option == "credit card")
+    {
+        showCC();
+    }
+    else if(option == "paypal")
+    {
+        showPayPal();
+    }
+    else if(option == "bitcoin")
+    {
+        showBitCoin();
+    }
+    
+});
+
+// Show the type of payment method only
+function showCC()
+{
+        creditcard.style.display = "block";
+        paypal.style.display = "none";
+        bitcoin.style.display = "none";
+}
+
+function showPayPal()
+{
+        paypal.style.display = "block";
+        creditcard.style.display = "none";
+        bitcoin.style.display = "none";
+}
+
+function showBitCoin()
+{
+        bitcoin.style.display = "block";
+        creditcard.style.display = "none";
+        paypal.style.display = "none";
+}
 
 form.addEventListener("submit", (event)=>{
     
