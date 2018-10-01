@@ -238,6 +238,9 @@ bitcoin.style.display = "none";
 // Disable the "Select payment method"
 paymentSelector.options[0].disabled = true;
 
+// Make the option global so we can check if we need to show an error on the credit card submit
+let option = "credit card";
+
 // Add an event listener
 paymentSelector.addEventListener("change", function() {
     
@@ -311,14 +314,27 @@ form.addEventListener("submit", (event)=>{
     {
         
         console.log("Need to selected at least one checkbox");
+        toggleActivitiesError(true, "You need to select at least one activity");
         event.preventDefault();
+    }
+    else
+    {
+        toggleActivitiesError(false, "");    
     }
     
     if(!isCCnumValid())
     {
-        // Show error
-        console.log("CC number isn't valid");
-        event.preventDefault();
+        if(option !== "credit card")
+        {
+            console.log("Error validating credit card but credit card option not selected");
+        }
+        else
+        {
+            // Show error
+            console.log("CC number isn't valid");
+            event.preventDefault();
+        }
+           
     }
     
     if(!isZipValid())
@@ -365,6 +381,9 @@ function isCheckBoxSelected()
             return true;
         }
     }
+
+    
+    return false;
 }
 
 // Validate Credit Card Number
@@ -443,4 +462,33 @@ function removeError(element)
     element.placeholder = "";
 }
 
-
+// Show an error in the activities section if a checkbox isn't filled out
+// Takes a boolean as an arg to toggle the error on and off
+function toggleActivitiesError(isError, message)
+{
+    
+    if(isError)
+    {
+        // Check if it already exists so we don't create more than one error
+        if(document.getElementById("act-error") !== null)
+        {
+             errorH3 = document.getElementById("act-error");
+             errorH3.innerHTML = message;          
+        }
+        else
+        {
+            const errorH3 = document.createElement("h3");
+            errorH3.innerHTML = message;
+            errorH3.className = "input-error";
+            errorH3.id = "act-error";
+            activities.prepend(errorH3);
+        }  
+        
+    }
+    else
+    {
+        document.getElementById("act-error").remove();    
+    }
+    
+   
+}
