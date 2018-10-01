@@ -286,10 +286,15 @@ form.addEventListener("submit", (event)=>{
     
     console.log("Submitting form");
     
+    // Clear the error formatting
+    removeError(name);
+    removeError(email);
+    
     // Catch a blank name field
     if(name.value == null || name.value == "")
     {
         console.log("Name can't be null");
+        showError(name, "Please add your name");
         event.preventDefault();
     }
     
@@ -297,12 +302,14 @@ form.addEventListener("submit", (event)=>{
     if(!isValidEmail(email.value))
     {
         console.log("Email isn't valid");
+        showError(email, "Email address doesn't look right");
         event.preventDefault();
     }
     
     // Make sure at least one checkbox is selected
     if(!isCheckBoxSelected())
     {
+        
         console.log("Need to selected at least one checkbox");
         event.preventDefault();
     }
@@ -310,18 +317,22 @@ form.addEventListener("submit", (event)=>{
     if(!isCCnumValid())
     {
         // Show error
+        console.log("CC number isn't valid");
+        event.preventDefault();
     }
     
     if(!isZipValid())
     {
         // Show error
         console.log("ZIP Code isn't valid");
+        event.preventDefault();
     }
     
     if(!isCvvValid())
     {
         //show Error
         console.log("CVV isn't valid");
+        event.preventDefault();
     }
 
     
@@ -359,7 +370,8 @@ function isCheckBoxSelected()
 // Validate Credit Card Number
 function isCCnumValid()
 {
-    const ccnum = document.getElementById("cc-num").value;
+    const ccnumElement = document.getElementById("cc-num");
+    const ccnum = ccnumElement.value;
     
     if(ccnum !== null && 
        ccnum !== "" && 
@@ -367,24 +379,31 @@ function isCCnumValid()
        ccnum.length <= 16)
         {
             console.log("CC Num is valid");
-            return true
+            removeError(ccnumElement);
+            return true;
         }
         else
         {
             console.log("CC num is not valid");
+            showError(ccnumElement, "Invalid Credit Card Number");
+            return false;
         }
     
 }
 // Validate ZIP number
 function isZipValid()
 {
-    const zip = document.getElementById("zip").value;
+    const zipElement = document.getElementById("zip");
+    const zip = zipElement.value;
     
     if(zip !== null && zip !== "" && zip.length <= 5)
     {
+        removeError(zipElement);
         return true;
     }
-    else{
+    else
+    {
+        showError(zipElement, "Invalid Zip");
         return false;
     }
 }
@@ -392,23 +411,36 @@ function isZipValid()
 // Validate CVV
 function isCvvValid()
 {
-    const cvv = document.getElementById("cvv").value;
+    const cvvElement = document.getElementById("cvv");
+    const cvv = cvvElement.value;
     
     console.log("CVV length is: " + cvv.length);
     
     if(cvv !== null && cvv !== "" && cvv.length == 3) // 0 index
     {
+        removeError(cvvElement);
         return true;
     }
     else
     {
+        showError(cvvElement, "Invalid CVV");
         return false;
     }
 }
 
-function showError(element)
+// Functio to assign the input-error class to an input box
+function showError(element, errorMessage)
 {
-    
+    // Add the error class to the element
+    element.className = "input-error";
+    element.placeholder = errorMessage;
+}
+
+function removeError(element)
+{
+    // Add the error class to the element
+    element.className = "";
+    element.placeholder = "";
 }
 
 

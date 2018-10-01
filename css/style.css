@@ -97,6 +97,13 @@ input {
     border-radius: 5px;
 }
 
+/*Class to show an input box has an error*/
+.input-error
+{
+    border: 2px solid red;
+    background: #FFCDD2;
+}
+
 input:focus {
 	background: #fff;
 	border-color: #90CAF9;
