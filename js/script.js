@@ -56,10 +56,16 @@ function hideElementById(element)
 
 // Get access to the design checkbox
 const designSelector = document.getElementById("design");
+const colorDiv = document.getElementById("colors-js-puns");
+colorDiv.style.display = "none";
+
 designSelector.addEventListener("change", (event)=>{
     
     const color = document.getElementById("color");
     const designItem = event.target.value;
+    
+    // Show the color picker on design theme change
+    colorDiv.style.display = "block";
     
     if(designItem === "js puns")
     {
@@ -75,6 +81,10 @@ designSelector.addEventListener("change", (event)=>{
         color.options[1] = createOption("Steel Blue", "steelblue");
         color.options[2] = createOption("Dim Grey", "dimgrey");
     }
+    else
+        {
+            colorDiv.style.display = "none";
+        }
 });
 
 // Clear the select options
