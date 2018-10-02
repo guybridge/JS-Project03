@@ -369,7 +369,10 @@ form.addEventListener("submit", (event)=>{
 function isValidEmail(email)
 {
     // Check for @
-    if(email.includes("@") && email.includes("."))
+    if(email.includes("@")&& // Email needs the @ symbol
+       email.includes(".") && // Email has to include at least one .
+      email.endsWith(".") !== true && // Check that email doesn't end with a .
+      email.startsWith(".") !== true) // Check that email doesn't staet with a .
     {
         return true;
     }
