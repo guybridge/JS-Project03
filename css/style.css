@@ -65,7 +65,7 @@ button {
 legend {
 	font-weight: 500;
 	padding-top: .5em;
-	border-top: 2px solid #424242;
+	border-top: 2px solid #1e85c1;
 	margin-bottom: 1.125em;
 }
 
@@ -91,7 +91,7 @@ input {
 	font-size: 1em;
 	font-weight: 500;
 	padding: .8em;
-	background: #F5F5F5;
+	background: white;
 	border: 2px solid #BDBDBD;
 	outline: none;
     border-radius: 5px;
@@ -118,7 +118,7 @@ input[type="radio"] {
 button {
 	color: #fff;
 	padding: .55em 1.25em;
-	background: #22627e;
+	background: #62b4f4;
 	margin: 1.25em 0 .5em;
 	cursor: pointer;
     border-radius: 5px;
