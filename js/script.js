@@ -13,6 +13,20 @@ name.focus();
 
 const email = document.getElementById("mail");
 
+// Event listener for email address box
+email.addEventListener("keyup", function(event){
+    
+    console.log(event.target.value);
+    if(!isValidEmail(event.target.value))
+    {
+        showError(email, "Email not valid");
+    }
+    else
+    {
+        removeError(email);
+    }
+});
+
 // Checkbox activities selected
 let hasSelectedCheckbox= false; 
 
@@ -374,10 +388,12 @@ function isValidEmail(email)
       email.endsWith(".") !== true && // Check that email doesn't end with a .
       email.startsWith(".") !== true) // Check that email doesn't staet with a .
     {
+        console.log("email is valid");
         return true;
     }
     else
     {
+        console.log("email isn't valid");
         return false;
     }
 }
