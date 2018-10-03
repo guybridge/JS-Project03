@@ -251,7 +251,7 @@ const paymentSelector = document.getElementById("payment");
 // Set the default payment method to credit card
 paymentSelector.value = "credit card";
 
-
+// Get access to the payment method divs
 const creditcard = document.getElementById("credit-card");
 const paypal = document.getElementById("paypal");
 const bitcoin = document.getElementById("bitcoin");
@@ -311,6 +311,7 @@ function showBitCoin()
 
 form.addEventListener("submit", (event)=>{
     
+
     console.log("Submitting form");
     
     // Clear the error formatting
@@ -343,22 +344,23 @@ form.addEventListener("submit", (event)=>{
     }
     else
     {
+        // Show an error in the activities section if no checkbox is selected
         toggleActivitiesError(false, "");    
     }
     
     if(!isCCnumValid())
     {
+        console.log(option);
+        // If the option isn't CC then it's OK to not check for ccnum details
         if(option !== "credit card")
         {
-            console.log("Error validating credit card but credit card option not selected");
+            console.log("Not check CC as CC not selected");
+            return;
         }
         else
         {
-            // Show error
-            console.log("CC number isn't valid");
             event.preventDefault();
         }
-           
     }
     
     if(!isZipValid())
@@ -374,8 +376,7 @@ form.addEventListener("submit", (event)=>{
         console.log("CVV isn't valid");
         event.preventDefault();
     }
-
-    
+        
     
 });
 
@@ -403,12 +404,22 @@ function isCheckBoxSelected()
     // Loop through the the checkboxes
     for(let i = 0; i < activities.children.length; i++)
     {
-        // Return true if any of the checkboxes show as true
-        if(activities.children[i].firstChild.checked)
+        try // Try to catch the error
         {
-            console.log("Found a checked checkbox");
-            return true;
+            // Return true if any of the checkboxes show as true
+            if(activities.children[i].firstChild.checked)
+            {
+                console.log("Found a checked checkbox");
+                return true;
+            }
+            
         }
+        catch(error)
+        {
+            console.log(error.message);
+        }
+            
+      
     }
 
     
@@ -496,28 +507,22 @@ function removeError(element)
 function toggleActivitiesError(isError, message)
 {
     
+    // Create the error message
+    const errorH3 = document.createElement("h3");
+    errorH3.innerHTML = message;
+    errorH3.className = "input-error";
+    errorH3.id = "act-error";
+    activities.prepend(errorH3);
+    
+    
+    // If there is an error we should show it
     if(isError)
     {
-        // Check if it already exists so we don't create more than one error
-        if(document.getElementById("act-error") !== null)
-        {
-             errorH3 = document.getElementById("act-error");
-             errorH3.innerHTML = message;          
-        }
-        else
-        {
-            const errorH3 = document.createElement("h3");
-            errorH3.innerHTML = message;
-            errorH3.className = "input-error";
-            errorH3.id = "act-error";
-            activities.prepend(errorH3);
-        }  
-        
+        errorH3.style.display = "block";
     }
-    else
+    else // Otherwise hide
     {
-        document.getElementById("act-error").remove();    
+        errorH3.style.display = "none";
     }
-    
    
 }
