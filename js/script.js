@@ -13,6 +13,8 @@ name.focus();
 
 const email = document.getElementById("mail");
 
+
+
 // Event listener for email address box
 email.addEventListener("keyup", function(event){
     
