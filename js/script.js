@@ -503,22 +503,24 @@ function removeError(element)
 }
 
 // Show an error in the activities section if a checkbox isn't filled out
+// Create the error message
+const errorH3 = document.createElement("h3");
+errorH3.className = "input-error";
+errorH3.id = "act-error";
+activities.prepend(errorH3);
+// Hide initially
+errorH3.style.display = "none";
+
 // Takes a boolean as an arg to toggle the error on and off
 function toggleActivitiesError(isError, message)
 {
-    
-    // Create the error message
-    const errorH3 = document.createElement("h3");
-    errorH3.innerHTML = message;
-    errorH3.className = "input-error";
-    errorH3.id = "act-error";
-    activities.prepend(errorH3);
     
     
     // If there is an error we should show it
     if(isError)
     {
         errorH3.style.display = "block";
+        errorH3.innerHTML = message;
     }
     else // Otherwise hide
     {
