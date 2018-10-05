@@ -455,7 +455,7 @@ function isZipValid()
     const zipElement = document.getElementById("zip");
     const zip = zipElement.value;
     
-    if(zip !== null && zip !== "" && zip.length <= 5)
+    if(zip !== null && zip !== "" && zip.length == 5)
     {
         removeError(zipElement);
         return true;
