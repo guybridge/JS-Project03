@@ -420,11 +420,8 @@ function isCheckBoxSelected()
         {
             console.log(error.message);
         }
-            
-      
+         
     }
-
-    
     return false;
 }
 
@@ -432,12 +429,12 @@ function isCheckBoxSelected()
 function isCCnumValid()
 {
     const ccnumElement = document.getElementById("cc-num");
-    const ccnum = ccnumElement.value;
+    const ccnum = parseInt(ccnumElement.value); // convert value to int
     
     if(ccnum !== null && 
        ccnum !== "" && 
-       ccnum.length >= 13 && 
-       ccnum.length <= 16)
+       ccnum.toString().length >= 13 && 
+       ccnum.toString().length <= 16 && isNaN(ccnum) == false)
         {
             console.log("CC Num is valid");
             removeError(ccnumElement);
@@ -455,16 +452,18 @@ function isCCnumValid()
 function isZipValid()
 {
     const zipElement = document.getElementById("zip");
-    const zip = zipElement.value;
+    const zip = parseInt(zipElement.value); // convert value to int
     
-    if(zip !== null && zip !== "" && zip.length == 5)
+    if(zip !== null && zip !== "" && zip.toString().length == 5 && isNaN(zip) == false)
     {
+        console.log("ZIP is valid, removing error");
         removeError(zipElement);
         return true;
     }
     else
     {
         showError(zipElement, "Invalid Zip");
+        console.log(zip.toString().length);
         return false;
     }
 }
@@ -473,11 +472,12 @@ function isZipValid()
 function isCvvValid()
 {
     const cvvElement = document.getElementById("cvv");
-    const cvv = cvvElement.value;
+    const cvv = parseInt(cvvElement.value); // convert value to int
+    
     
     console.log("CVV length is: " + cvv.length);
     
-    if(cvv !== null && cvv !== "" && cvv.length == 3) // 0 index
+    if(cvv !== null && cvv !== "" && cvv.toString().length == 3 && isNaN(cvv) == false) // 0 index
     {
         removeError(cvvElement);
         return true;
